@@ -9,7 +9,8 @@ const app = express();
 
 const testConnection = async (connectionString) => {
     try {
-        const pool = await sql.connect(connectionString);
+        const pool = await new sql.ConnectionPool(connectionString);
+        await pool.connect();
         pool.close();
         return SuccessString
     } catch (err) {
